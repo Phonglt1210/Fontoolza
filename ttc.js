@@ -23,7 +23,7 @@
     let chatIndex = 0;
     let chatList = [];
 
-    // ✅ Load chatList from localStorage
+    // 
     try {
         const savedChat = localStorage.getItem("customChatList");
         if (savedChat) chatList = JSON.parse(savedChat);
