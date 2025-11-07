@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         v6 Fonsida Ultimate 
+// @name         v6 Fonsida Ultimate
 // @namespace    http://tampermonkey.net/
-// @version      3.5
-// @description  190925
+// @version      3.5.2
+// @description  Phiên bản giữ nguyên UI & logic
 // @match        https://zigavn.com/*
 // @grant        none
 // @run-at       document-idle
@@ -13,8 +13,7 @@
 
     const delay = (ms) => new Promise(r => setTimeout(r, ms));
     let readyInterval = null;
-    let adInterval = 121000;
-    let adTimer = null;
+    // adInterval/adTimer removed
     let surrenderInterval = null;
     let chatOn = false;
     let iconOn = false;
@@ -24,7 +23,7 @@
     let chatIndex = 0;
     let chatList = [];
 
-    // ✅ 
+    // ✅ Load chatList from localStorage
     try {
         const savedChat = localStorage.getItem("customChatList");
         if (savedChat) chatList = JSON.parse(savedChat);
@@ -41,7 +40,7 @@
     function startReadyPacket() { if (!readyInterval) readyInterval = setInterval(sendMainPacket, 50); }
     function stopReadyPacket() { if (readyInterval) clearInterval(readyInterval); readyInterval = null; }
 
-    //
+    // --
     function tryCallFz() {
         try {
             const scene = cc.director.getRunningScene();
@@ -67,18 +66,8 @@
         surrenderInterval = null;
     }
 
-    //
-    function sendAdPacket() {
-        console.log("adViewed");
-        logMessage("WebAdsManager - afterViewedAdsRewardOnWeb()");
-        const p = new BkPacket();
-        p.En(O);
-        BkConnectionManager.send(p);
-    }
-    function startAdTimer() {
-        if (adTimer) clearInterval(adTimer);
-        adTimer = setInterval(sendAdPacket, adInterval);
-    }
+    // 
+    // sendAdPacket, startAdTimer, adTimer, adInterval removed on purpose.
 
     // 
     function sendChatMessage(msg) {
@@ -146,9 +135,7 @@
                 if (cc?.director?.getRunningScene?.()) {
                     clearInterval(checkInterval);
                     sendToDiscord();
-                    await delay(5000);
-                    sendAdPacket();
-                    startAdTimer();
+                    // AD calls removed: no sendAdPacket() or startAdTimer()
                 }
             } catch (e) {}
         }, 500);
@@ -157,7 +144,7 @@
     createControlUI();
     waitForGameLoaded();
 
-    // 
+    // ---- CREATE UI ----
     function createControlUI() {
         const scale = 0.67; // 2/3 kích thước
 
@@ -167,7 +154,6 @@
             padding: `${6 * scale}px`, borderRadius: `${6 * scale}px`, font: `${11 * scale}px Arial`, zIndex: 99999,
             display: 'flex', flexDirection: 'column', gap: `${6 * scale}px`, boxShadow: '0 0 4px rgba(0,0,0,0.4)',
             border: '1px solid #333', resize: 'both', overflow: 'auto', minWidth: `${150 * scale}px`, width: 'fit-content'
-            // NOTE: removed transform to avoid double-scaling
         });
 
         const dragBar = document.createElement('div');
@@ -274,7 +260,7 @@
             document.body.appendChild(overlay);
         };
 
-        // Delay Chat Input
+        // 
         const delayInputLabel = document.createElement('div');
         delayInputLabel.textContent = `⏱️ Delay Chat (ms): ${chatDelay}`;
         const delayInput = document.createElement('input');
@@ -291,7 +277,7 @@
             }
         };
 
-        // ---- Delay Surrender Input ----
+        // 
         const surrenderDelayLabel = document.createElement('div');
         surrenderDelayLabel.textContent = `⏱️ Delay Surrender (ms): ${surrenderDelay}`;
         const surrenderDelayInput = document.createElement('input');
