@@ -20,7 +20,7 @@
         window.showPopupConfirmWith = function (message, title, acceptCallback, _, rejectCallback) {
             log("Phát hiện popup xác nhận: " + message);
 
-            // Nếu popup là lời mời cầu hòa
+            // 
             if (message.includes("muốn hòa") || message.includes("đề nghị hòa")) {
                 log("Tự động từ chối hòa");
                 if (typeof rejectCallback === "function") {
