@@ -41,7 +41,7 @@
   // ===== HOOK BUTTON =====
   async function hookButtons() {
     while (!cc || !ccui || !ccui.Button) {
-      await delay(500);
+      await delay(0);
     }
 
     console.log("[CT] Hook button...");
