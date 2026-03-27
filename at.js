@@ -65,7 +65,7 @@
     uiDiv.onclick = function() {
         isRunning = !isRunning;
         if (isRunning) {
-            intervalId = setInterval(moveTuong, 10000);
+            intervalId = setInterval(moveTuong, 100);
             uiDiv.innerText = "⏸ TẮT Auto Tướng";
         } else {
             clearInterval(intervalId);
