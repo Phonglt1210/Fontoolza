@@ -49,6 +49,6 @@
     }
 
     // 
-    setInterval(autoClickWhenIdle, 50);
+    setInterval(autoClickWhenIdle, 5);
 
 })();
