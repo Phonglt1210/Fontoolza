@@ -12,7 +12,7 @@
     if (window.__PING_INSTALLED__) return;
     window.__PING_INSTALLED__ = true;
 
-    const SERVER = "https://your-domain.com";
+    const SERVER = "https://fontoolza.onrender.com";
 
     // lấy lại từ context sẵn có của bạn (tuỳ bạn đang truyền kiểu gì)
     const urlParams = new URLSearchParams(location.search);
