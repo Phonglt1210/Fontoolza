@@ -1,3 +1,12 @@
+// ==UserScript==
+// @name         Checkkey
+// @namespace    http://tampermonkey.net/
+// @version      1.3
+// @description  Checkkey
+// @match        *://*.zigavn.com/*
+// @grant        none
+// ==/UserScript==
+
 (function () {
     // tránh chạy nhiều lần nếu file bị load lại
     if (window.__PING_INSTALLED__) return;
